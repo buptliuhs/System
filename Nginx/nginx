@@ -1,0 +1,13 @@
+#!/bin/bash
+# description: Nginx Start Stop Restart
+# processname: nginx
+# chkconfig: 234 20 80
+
+export NGINX_HOME=/opt/vmac/nginx
+
+case $1 in
+start)
+su - vmac_user -c "$NGINX_HOME/sbin/nginx"
+;;
+esac
+exit 0

@@ -1,0 +1,85 @@
+yum install subversion
+
+#sudo /usr/sbin/useradd svn
+#sudo passwd svn
+
+#su svn
+
+cd
+mkdir /mnt/repos
+ln -s /mnt/repos /repos
+
+cd /repos
+svnadmin create vm
+
+edit "/repos/vm/conf/svnserve.conf"
+
+anon-access = none
+
+#auth-access = write
+
+password-db = passwd
+
+#authz-db = authz
+
+edit the password file "/repos/vm/conf/passwd"
+
+[users]
+hsliu = hsliu
+
+edit the password file "/repos/vm/conf/authz"
+
+[myproject:/]
+hsliu = rw
+
+Start SvnServer
+
+svnserve -d -r /repos/
+
+Checkout
+
+svn co svn://localhost/vm
+
+
+
+
+------------------
+yum install httpd
+yum install mod_dav_svn subversion
+
+vi /etc/httpd/conf.d/subversion.conf
+
+<Location /repos>
+   DAV svn
+   SVNParentPath /repos
+   AuthType Basic
+   AuthName "VMAC"
+   AuthUserFile /repos/passwd
+   Require valid-user
+</Location>
+
+htpasswd -c /repos/passwd hsliu
+htpasswd /repos/passwd hanyuan
+htpasswd /repos/passwd yanghai
+htpasswd /repos/passwd xinguang
+
+
+vi /etc/httpd/conf/httpd.conf
+Listen 8090
+
+service httpd restart
+
+svn co http://localhost:8090/repos/vm
+
+chmod -R o+r /repos
+chmod -R o-w /repos
+chown -R apache:apache /repos
+chmod -R o+r /mnt/repos
+chmod -R o-w /mnt/repos
+chown -R apache:apache /mnt/repos
+chkconfig httpd on
+
+--------------- Ç¨ÒÆ -------------
+svnadmin dump /repos/vm > vm.dump
+svnadmin load /repos/vm < vm.dump
+

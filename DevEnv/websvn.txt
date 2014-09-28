@@ -1,0 +1,24 @@
+1. download websvn.tar.gz
+2. extract to /opt/websvn
+3. vi /etc/httpd/conf/httpd.conf
+4. yum install php
+
+Alias /websvn "/opt/websvn"
+ 
+<Directory "/opt/websvn">
+    Options -Indexes MultiViews
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+</Directory>
+
+4. cp /opt/websvn/include/distconfig.php /opt/websvn/include/config.php
+5. vi /opt/websvn/include/config.php
+$config->addRepository('VMAC Weigou Repository', 'http://localhost:8090/repos/vm', null, 'hsliu', 'HGKJ2013');
+$config->allowDownload();
+6. vi /opt/websvn/.htaccess
+AuthName "Websvn Login"
+AuthType Basic
+AuthUserFile /repos/passwd
+Require valid-user
+

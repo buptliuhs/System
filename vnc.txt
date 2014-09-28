@@ -1,0 +1,2 @@
+yum install vnc vnc-server tigervnc-server
+yum install firefox

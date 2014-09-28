@@ -1,0 +1,19 @@
+wget http://mirrors.yun-idc.com/eclipse//hudson/war/hudson-3.1.0.war
+java -jar hudson-3.1.0.war --httpPort=8888
+
+=======================================================================
+Another option:
+wget http://java.net/projects/hudson/downloads/download/Redhat/hudson-3.1.0-1.1.noarch.rpm
+rpm -ivh hudson-3.1.0-1.1.noarch.rpm
+-------------------
+sudo wget -O /etc/yum.repos.d/hudson.repo http://hudson-ci.org/redhat/hudson.repo
+sudo yum check-update
+sudo yum install hudson
+-------------------
+
+=================================
+chkconfig hudson on
+service hudson start
+
+vi /etc/sysconfig/hudson
+HUDSON_PORT="8888"

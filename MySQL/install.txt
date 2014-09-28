@@ -1,0 +1,57 @@
+# su -
+# yum install mysql mysql-server
+# chkconfig mysqld on
+# find / -iname '*.cnf' -print
+/usr/share/mysql/my-innodb-heavy-4G.cnf 
+/usr/share/mysql/my-large.cnf
+/usr/share/mysql/my-small.cnf
+/usr/share/mysql/my-medium.cnf
+/usr/share/mysql/my-huge.cnf
+/usr/share/texmf/web2c/texmf.cnf
+/usr/share/texmf/web2c/mktex.cnf
+/usr/share/texmf/web2c/fmtutil.cnf
+/usr/share/texmf/tex/xmltex/xmltexfmtutil.cnf
+/usr/share/texmf/tex/jadetex/jadefmtutil.cnf
+/usr/share/doc/MySQL-server-community-5.1.22/my-innodb-heavy-4G.cnf
+/usr/share/doc/MySQL-server-community-5.1.22/my-large.cnf
+/usr/share/doc/MySQL-server-community-5.1.22/my-small.cnf
+/usr/share/doc/MySQL-server-community-5.1.22/my-medium.cnf
+/usr/share/doc/MySQL-server-community-5.1.22/my-huge.cnf
+
+# cp /usr/share/mysql/my-medium.cnf /etc/my.cnf
+# vi /etc/my.cnf
+[client]
+default-character-set=utf8
+[mysqld]
+default-character-set=utf8
+
+# service mysqld restart
+# mysql
+mysql> show variables like 'character_set_%';
++--------------------------+----------------------------+
+| Variable_name             | Value                       |
++--------------------------+----------------------------+
+| character_set_client      | utf8                        |
+| character_set_connection | utf8                        |
+| character_set_database    | utf8                        |
+| character_set_filesystem | binary                      |
+| character_set_results     | utf8                        |
+| character_set_server      | utf8                        |
+| character_set_system      | utf8                        |
+| character_sets_dir        | /usr/share/mysql/charsets/ |
++--------------------------+----------------------------+
+8 rows in set (0.02 sec)
+
+# service mysqld stop
+# mv /var/lib/mysql /data
+# vi /etc/my.cnf
+	#socket         = /var/lib/mysql/mysql.sock
+	socket          = /data/mysql/mysql.sock
+# ln -sf /usr/share/zoneinfo/Asia/Chongqing /etc/localtime
+# date 092510582013 # (2013/09/25 10:58:00) Change system time if necessary
+
+yum install ntp
+chkconfig ntpd on
+service ntpd start
+ntpstat
+

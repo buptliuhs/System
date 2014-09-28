@@ -1,0 +1,10 @@
+vi /etc/postfix/main.cf
+----------
+inet_interfaces = all
+----------
+
+service postfix restart
+
+chkconfig postfix on
+
+

@@ -1,0 +1,4 @@
+8080/8180: Tomcat
+8090: Apache httpd (svn/websvn)
+8000: Nginx (images/media/static)
+8888: Hudson

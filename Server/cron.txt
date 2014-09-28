@@ -1,0 +1,10 @@
+su -
+crontab -e
+--------------
+0 2 * * * /sbin/shutdown -r now
+--------------
+
+crontab -l
+
+service crond restart
+

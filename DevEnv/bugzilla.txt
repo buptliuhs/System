@@ -1,0 +1,46 @@
+login as root
+# yum install gd-devel
+# yum install perl-CPAN
+# cd /root
+# perl -v # check perl
+# mysql -V # check mysql
+# mkdir bugzilla
+# cd bugzilla
+# wget http://ftp.mozilla.org/pub/mozilla.org/webtools/bugzilla-4.4.1.tar.gz
+# tar xvf bugzilla-4.4.1.tar.gz
+# cd bugzilla-4.4.1
+# ./checksetup.pl --check-modules
+# /usr/bin/perl install-module.pl --all
+# /usr/bin/perl install-module.pl GD
+# ./checksetup.pl --check-modules
+
+# ./checksetup.pl
+# vi localconfig
+$db_driver = 'mysql';
+$db_host = 'localhost';
+$db_name = 'bugs';
+$db_user = 'root';
+$db_pass = 'root';
+
+# Rerun: ./checksetup.pl
+Enter the e-mail address of the administrator: buptliuhs@hotmail.com
+Enter the real name of the administrator: Huansheng LIU
+Enter a password for the administrator account: HGKJ2013
+Please retype the password to verify: HGKJ2013
+
+# cd
+# mv /root/bugzilla/bugzilla-4.4.1 /data/bugzilla
+# vi /etc/httpd/conf/httpd.conf
+Alias /bugzilla "/data/bugzilla"
+<Directory /data/bugzilla>
+    AddHandler cgi-script .cgi
+    Options +ExecCGI +FollowSymLinks
+    DirectoryIndex index.cgi index.html
+    AllowOverride Limit FileInfo Indexes Options
+</Directory>
+
+# service httpd restart
+
+URL: http://vmac:8090/bugzilla/
+
+

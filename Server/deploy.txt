@@ -1,0 +1,25 @@
+++++++++++++++ ²¿ÊðDatabase ++++++++++++++
+# su - vmac_user
+# cd
+# svn co http://vmac:8090/repos/vm/RD/Implementation/Database
+# mysql -u root -p wg
+mysql> create database wg;
+mysql> exit;
+
+# cd Database
+# ./import-data.sh
+
+++++++++++++++ ²¿ÊðSolr ++++++++++++++
+# su - vmac_user
+# vi /opt/vmac/tomcat/conf/Catalina/localhost/solr.xml
+----------------
+<?xml version="1.0" encoding="utf-8"?>
+<Context docBase="/opt/vmac/solr/solr/solr.war" debug="0" crossContext="true">
+  <Environment name="solr/home" type="java.lang.String" value="/opt/vmac/solr/solr/" override="true"/>
+</Context>
+----------------
+# cd /opt/vmac
+# svn co http://vmac:8090/repos/vm/RD/Implementation/Solr/ /opt/vmac/solr
+# svn co http://vmac:8090/repos/vm/
+# cp /home/vmac_user/vm/RD/Implementation/System/Tomcat/lib/* /opt/vmac/tomcat/lib
+
